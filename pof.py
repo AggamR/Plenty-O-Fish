@@ -10,25 +10,24 @@ class part:
         self.var = var
         self.name = name
 
-
 # colors in fish shell scripting
 colors = "black, red, green, yellow, blue, magenta, cyan, white, brblack, brred, brgreen, bryellow, brblue, brmagenta, brcyan, brwhite"
 
 themecode = "" # fish sccripting for the theme
-fishprompt = "" # to be in fish_prompt fucntion in .fish file\
+fishprompt = "" # to be in fish_prompt fucntion in .fish file
 welcomeMSG  = """
 Plenty O' Fish
 ==============
 This is a simple tool to allow you to create your own fish shell themes!
-My Github: https://github.com/AggamR
+My Github: https://github.com/AggamRa
 """
 print(welcomeMSG)
 
 # everything that the theme consists of (very limited, but it will be expanded...) 
 components = [
-    part("command", True, code = "set fish_color_command <COLOR>"),
-    part("argument", True, code = "set fish_color_param <COLOR>"),
-    part("error",True, code = "set fish_color_error <COLOR>"),
+    part("command syntax", True, code = "set fish_color_command <COLOR>"),
+    part("argument syntax", True, code = "set fish_color_param <COLOR>"),
+    part("error syntax",True, code = "set fish_color_error <COLOR>"),
     part("[", var = "\"[\""),
     part("machine name", code = "set machineName (cat /proc/sys/kernel/hostname)", var = "$machineName"),
     part("@", var = "\"@\""),
@@ -74,8 +73,8 @@ for component in components:
     if not component.isHighlight and component.visible:
         varsSetup += f"\t{component.code}\n" 
         finalLine += f"(set_color {component.color}){component.var}"
-themecode += (f"\nfunction fish_prompt\n{varsSetup}\n\t{finalLine}\nend")
 
+themecode += (f"\nfunction fish_prompt\n{varsSetup}\n\t{finalLine}\nend")
 
 # saving of code
 vaildInp = False # fail-safe for int()
