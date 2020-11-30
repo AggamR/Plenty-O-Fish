@@ -29,9 +29,9 @@ components = [
     part("argument syntax", True, code = "set fish_color_param <COLOR>"),
     part("error syntax",True, code = "set fish_color_error <COLOR>"),
     part("[", var = "\"[\""),
-    part("machine name", code = "set machineName (cat /proc/sys/kernel/hostname)", var = "$machineName"),
-    part("@", var = "\"@\""),
     part("user", var = "$USER"),
+    part("@", var = "\"@\""),
+    part("machine name", code = "set machineName (cat /proc/sys/kernel/hostname)", var = "$machineName"),
     part(":", var = "\": \""),
     part("Working Directory", code = "set cwd (string replace /home/$USER \"~\" $PWD)", var = "$cwd"),
     part("]", var = "\"]\""),
@@ -65,7 +65,7 @@ for component in components:
 
     if component.isHighlight:
         themecode += f"{component.code}\n".replace("<COLOR>",component.color)
-
+        
 #making of code
 varsSetup = "" # setup of vars like "cwd"
 finalLine = "echo " #the final line, the "echo".
