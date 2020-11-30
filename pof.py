@@ -19,7 +19,7 @@ welcomeMSG  = """
 Plenty O' Fish
 ==============
 This is a simple tool to allow you to create your own fish shell themes!
-My Github: https://github.com/AggamRa
+My Github: https://github.com/AggamR
 """
 print(welcomeMSG)
 
