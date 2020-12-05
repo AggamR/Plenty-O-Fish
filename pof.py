@@ -1,5 +1,18 @@
 import random
 
+# generusly donated by Stack Overflow @Boubakr (lol)
+class color:
+   PURPLE = '\033[95m'
+   CYAN = '\033[96m'
+   DARKCYAN = '\033[36m'
+   BLUE = '\033[94m'
+   GREEN = '\033[92m'
+   YELLOW = '\033[93m'
+   RED = '\033[91m'
+   BOLD = '\033[1m'
+   UNDERLINE = '\033[4m'
+   END = '\033[0m'
+
 # they're objects so i'll be expanded more easily.
 class part:
     def __init__(self, name, isHighlight = False, code = "", var="", color = "", visible = True):
@@ -11,7 +24,7 @@ class part:
         self.name = name
 
 # colors in fish shell scripting
-colors = "black, red, green, yellow, blue, magenta, cyan, white, brblack, brred, brgreen, bryellow, brblue, brmagenta, brcyan, brwhite"
+colors = "> black, red, green, yellow, blue, magenta, cyan, white, brblack, \n> brred, brgreen, bryellow, brblue, brmagenta, brcyan, brwhite"
 
 themecode = "" # fish sccripting for the theme
 fishprompt = "" # to be in fish_prompt fucntion in .fish file
@@ -25,9 +38,9 @@ print(welcomeMSG)
 
 # everything that the theme consists of (very limited, but it will be expanded...) 
 components = [
-    part("command syntax", True, code = "set fish_color_command <COLOR>"),
-    part("argument syntax", True, code = "set fish_color_param <COLOR>"),
-    part("error syntax",True, code = "set fish_color_error <COLOR>"),
+    part("command syntax highlight", True, code = "set fish_color_command <COLOR>"),
+    part("argument syntax highlight", True, code = "set fish_color_param <COLOR>"),
+    part("error syntax highlight",True, code = "set fish_color_error <COLOR>"),
     part("[", var = "\"[\""),
     part("user", var = "$USER"),
     part("@", var = "\"@\""),
@@ -39,13 +52,14 @@ components = [
 ]
 
 for component in components:
-    print(f"Component: '{component.name}'")
+    print(f"{color.BOLD}{color.RED}====={color.YELLOW}====={color.GREEN}====={color.CYAN}====={color.BLUE}====={color.PURPLE}====={color.END}")
+    print(f"{color.BOLD}Component: \"{component.name}\"{color.END}")
     
     if not component.isHighlight:
         validVis = False # fail-safe for bool(int())
         while not validVis:
             try:
-                component.visible = bool(int(input(f"Do you want this component to be visible? (0/1) ")))
+                component.visible = bool(int(input(f"Do you want this component to be visible({color.RED}0{color.END}/{color.GREEN}1{color.END})? ")))
                 validVis = True
             except:
                 pass
@@ -54,15 +68,13 @@ for component in components:
             component.code = "" # makes less IF statements later
             continue
     
-    print(f"available colors are: \n{colors}")
-    while (component.color not in colors.split(", ")) or (component.color == " "):
+    print(f"> available colors are: \n{colors}")
+    while (component.color not in colors.replace("\n","").replace("> ","").split(", ")) or (component.color == " "):
         component.color = input(f"please enter a valid color for this component: ")
         #random color
         if component.color == "r":
             component.color = colors.split(", ")[random.randint(0,len(colors.split(", "))-1)]
-        
-    print("\n")
-
+            
     if component.isHighlight:
         themecode += f"{component.code}\n".replace("<COLOR>",component.color)
         
