@@ -29,7 +29,7 @@ colors = "> black, red, green, yellow, blue, magenta, cyan, white, brblack, \n> 
 themecode = "" # fish sccripting for the theme
 fishprompt = "" # to be in fish_prompt fucntion in .fish file
 welcomeMSG  = """
-Plenty O' Fish
+Fish O' Plenty
 ==============
 This is a simple tool to allow you to create your own fish shell themes!
 My Github: https://github.com/AggamR
