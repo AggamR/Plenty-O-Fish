@@ -78,7 +78,7 @@ for component in components:
     if component.isHighlight:
         themecode += f"{component.code}\n".replace("<COLOR>",component.color)
         
-#making of code
+# making of code
 varsSetup = "" # setup of vars like "cwd"
 finalLine = "echo " #the final line, the "echo".
 for component in components:
